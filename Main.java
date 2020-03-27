@@ -6,11 +6,13 @@ class Main {
     int x = input.nextInt();
     int y = input.nextInt();
     
+    Game game = new Game();
     Arena arena = new Arena();
     arena.printArena();
     Plant plantA = new PeaShooter(x,y);
     arena.addPlant(plantA);
     arena.printArena();
-
+    arena.addPlant(plantA);
+    input.close();
   }
 }

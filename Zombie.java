@@ -25,4 +25,6 @@ public abstract class Zombie{
         show = a;
     }
 //    public abstract void walk();
+
+//    public void eat(Plant p)
 }

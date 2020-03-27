@@ -1,12 +1,11 @@
 public class Arena{
-    static public int score;
+
     private char[] row1; 
     private char[] row2; 
     private char[] row3; 
     private char[] row4; 
     
     public Arena(){
-        Arena.score = 0;
         this.row1 = new char[60];
         this.row2 = new char[60];
         this.row3 = new char[60];
@@ -81,7 +80,7 @@ public class Arena{
         }
         System.out.print('\n');
     }
-        public void addPlant (Plant plant) {
+    public void addPlant (Plant plant) {
             if (plant.getOrigin().getOrdinat() == 1){
                 if (row1[plant.getOrigin().getAbsis()-1] == ' '){
                     row1[plant.getOrigin().getAbsis()-1] = plant.getShow(); 
@@ -110,6 +109,10 @@ public class Arena{
             } else {
                 System.out.println("Masukan tidak valid");
             }
+        }
+
+        public void skip(){
+            
         }
 
 
