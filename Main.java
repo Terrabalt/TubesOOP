@@ -11,8 +11,8 @@ class Main {
     arena.printArena();
     Plant plantA = new PeaShooter(x,y);
     arena.addPlant(plantA);
+    arena.addZombies();
     arena.printArena();
-    arena.addPlant(plantA);
     input.close();
   }
 }

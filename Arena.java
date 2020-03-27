@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Arena{
 
     private char[] row1; 
@@ -111,8 +113,44 @@ public class Arena{
             }
         }
 
-        public void skip(){
-            
+        public void addZombies(){
+            Random random = new Random();
+            int randomNumb = random.nextInt(4);
+            int randomZombie = random.nextInt(2);
+            Zombie zombie;
+            if (randomZombie == 0){
+                zombie = new CrazyZombie(59, randomNumb);
+            } else {
+                zombie = new RobotZombie(59, randomNumb);
+            }
+            if (randomNumb == 1){
+                if (row1[58] == ' '){
+                    row1[58] = zombie.getShow(); 
+                    System.out.println("---" + row1[58] + "---");
+                } else {
+                    System.out.println("Sudah terisi");
+                }
+            } else if (randomNumb == 2){
+                if (row2[58] == ' '){
+                    row2[58] = zombie.getShow();   
+                } else {
+                    System.out.println("Sudah terisi");
+                }
+            } else if (randomNumb == 3){
+                if (row3[58] == ' '){
+                    row3[58] = zombie.getShow();   
+                } else {
+                    System.out.println("Sudah terisi");
+                }
+            } else if (randomNumb == 4){
+                if (row4[58] == ' '){
+                    row4[58] = zombie.getShow();   
+                } else {
+                    System.out.println("Sudah terisi");
+                }
+            } else {
+                System.out.println("Masukan tidak valid");
+            }
         }
 
 
