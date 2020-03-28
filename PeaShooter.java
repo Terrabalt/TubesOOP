@@ -5,6 +5,8 @@ public class PeaShooter extends Plant{
         super.setShow('P');
     }
 
-//    public void shoot();
+    public void shoot(){
+        super.shoot(1);
+    }
 
 }

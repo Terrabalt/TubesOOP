@@ -1,31 +1,20 @@
-public class Bullet{
-    private char show;
-    private Point origin;
+public class Bullet extends Element{
     private int power;
     
     public Bullet(int power, Point p){
+        super(p);
         this.power = power;
-        this.show = '-';
-        this.origin = p;
-    }
-    public char getShow(){
-        return show;
+        super.setShow('-');
     }
     
+    public Bullet(int power, int x, int y){
+        super(x,y);
+        this.power = power;
+        super.setShow('-');
+    }
+
     public int getPower(){
         return power;
-    }
-    public Point getOrigin(){
-        return origin;
-    }
-
-    public void setOrigin(int x, int y){
-        origin.setAbsis(x);
-        origin.setOrdinat(y);
-    }
-
-    public void setShow(char a){
-        show = a;
     }
 
     public void setPower(int power){

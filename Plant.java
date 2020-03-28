@@ -1,39 +1,36 @@
-public abstract class Plant{
+public abstract class Plant extends Element{
     private int life;
-    private Point origin;
-    private char show;
 
     public Plant(int life,int x,int y){
+        super(x,y);
         this.life = life;
-        this.origin = new Point(x,y);
+    }
+
+    public Plant(int life, Point p){
+        super(p);
+        this.life = life;
     }
 
     public int getLife(){
         return life;
     }
 
-    public Point getOrigin(){
-        return origin;
-    }
-
-    public char getShow(){
-        return show;
-    }
-
     public void setLife(int life){
         this.life = life;
     }
-    
-    public void setPoint(int x, int y){
-        Point p = new Point(x,y);
-        this.origin = p;
+        
+    public void shoot(int power){
+        Bullet bullet = new Bullet(power,super.getOrigin().getAbsis()+1, super.getOrigin().getOrdinat());
+        
     }
-    
-    public void setShow(char a){
-        this.show = a;
+
+    public void eaten(int power){
+        if (life >= power){
+            setLife(getLife()-power);
+        } else {
+            setLife(0);
+        }
     }
-    
-//    public abstract void shoot();
 
 
     

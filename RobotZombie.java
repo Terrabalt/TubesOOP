@@ -4,6 +4,8 @@ public class RobotZombie extends Zombie{
         super(6,x,y);
         super.setShow('R');
     }
-
-//    public void walk();
+    
+    public void walk(){
+        super.walk(4);
+    }
 }

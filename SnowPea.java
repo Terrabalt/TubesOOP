@@ -4,7 +4,9 @@ public class SnowPea extends Plant{
         super(5,x,y);
         super.setShow('S');
     }
-
-//    public void shoot();
+    
+    public void shoot(){
+        super.shoot(3);
+    }
 
 }

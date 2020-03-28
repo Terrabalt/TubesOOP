@@ -1,30 +1,40 @@
-public abstract class Zombie{
+public abstract class Zombie extends Element{
     private int life;
-    private Point origin;
-    private char show;
 
     public Zombie(int life, int x, int y){
+        super(x,y);
         this.life = life;
-        Point p = new Point(x,y);
-        this.origin = p;
+    }
+
+    public Zombie(int life, Point p){
+        super(p);
+        this.life = life;
     }
 
     public int getLife(){
         return life;
     }
 
-    public Point getPoint(){
-        return origin;
-    }
-    
-    public char getShow(){
-        return show;
+    public void setLife(int life){
+        this.life = life;
     }
 
-    public void setShow(char a){
-        show = a;
+    public void walk(int distance){
+        Point p = super.getOrigin();
+        p.translate(-distance,0);
+        super.setOrigin(p);
+        
     }
-//    public abstract void walk();
 
-//    public void eat(Plant p)
+    // public void eat (Plant p);
+        
+    public void shot(int power){
+        if (life >= power){
+            setLife(getLife()-power);
+            Game.sunflowerPoints += 1;
+        } else {
+            setLife(0);
+        }
+    } 
+
 }

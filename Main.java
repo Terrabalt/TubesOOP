@@ -9,9 +9,9 @@ class Main {
     Game game = new Game();
     Arena arena = new Arena();
     arena.printArena();
-    Plant plantA = new PeaShooter(x,y);
-    arena.addPlant(plantA);
-    arena.addZombies();
+    char type = 'P'; 
+    game.addPlants(x,y,type);
+    game.addZombies();
     arena.printArena();
     input.close();
   }
