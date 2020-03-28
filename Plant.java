@@ -21,7 +21,7 @@ public abstract class Plant extends Element{
         
     public void shoot(int power){
         Bullet bullet = new Bullet(power,super.getOrigin().getAbsis()+1, super.getOrigin().getOrdinat());
-        
+        Game.addElement(bullet);
     }
 
     public void eaten(int power){
@@ -29,6 +29,9 @@ public abstract class Plant extends Element{
             setLife(getLife()-power);
         } else {
             setLife(0);
+        }
+        if (life == 0){
+            Game.deleteElement(this);
         }
     }
 

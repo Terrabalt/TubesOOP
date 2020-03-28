@@ -3,16 +3,65 @@ import java.util.Scanner;  // Import the Scanner class
 class Main {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);  // Create a Scanner object
-    int x = input.nextInt();
-    int y = input.nextInt();
     
     Game game = new Game();
-    Arena arena = new Arena();
-    arena.printArena();
-    char type = 'P'; 
-    game.addPlants(x,y,type);
+    char typeP = 'P'; 
+    char typeS = 'S';
+    Game.arena.printArena();
+    System.out.println("MULAI!");
+
     game.addZombies();
-    arena.printArena();
-    input.close();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    game.addZombies();
+    Game.arena.printArena();
+    
+/*      int x = input.nextInt();
+      int y = input.nextInt();
+      String type = input.next();
+      if (type.equals("pea")){
+        game.addPlants(x,y,typeP);
+      } else {
+        game.addPlants(x,y,typeS);
+      }
+      game.addZombies();
+      Game.arena.printArena();   
+      System.out.println("Selanjutnya");   
+
+       x = input.nextInt();
+       y = input.nextInt();
+       type = input.next();
+      if (type.equals("pea")){
+        game.addPlants(x,y,typeP);
+      } else {
+        game.addPlants(x,y,typeS);
+      }
+      game.addZombies();
+      Game.arena.printArena();   
+      System.out.println("Selanjutnya");   
+
+       x = input.nextInt();
+       y = input.nextInt();
+       type = input.next();
+      if (type.equals("pea")){
+        game.addPlants(x,y,typeP);
+      } else {
+        game.addPlants(x,y,typeS);
+      }
+      game.addZombies();
+      Game.arena.printArena();   
+      System.out.println("Selanjutnya");   
+*/
+
+      input.close();
   }
 }

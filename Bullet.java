@@ -21,7 +21,12 @@ public class Bullet extends Element{
         this.power = power;
     }
     
-//    public void fly();
+    public void fly(int distance){
+        Point p = super.getOrigin();
+        p.translate(-distance,0);
+        Game.moveElement(this, p);
+        super.setOrigin(p);        
+    }
 
 //    public void kill(Zombie z);
 
