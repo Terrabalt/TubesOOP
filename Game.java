@@ -37,7 +37,7 @@ public class Game{
 
     public static void skip(){
         for (int i=0; i<240; i++){
-//            zombies[i].walk(); gimana pake genericnya :( )
+            zombies[i].walk();
         }
     }
 
@@ -83,21 +83,43 @@ public class Game{
         } else {}
     }
 
-    public static void moveElement(Element elmt, Point p){ //tambahin syarat kalau depannya ada sesuatu?
+    public static boolean moveElement(Element elmt, Point p){ 
+	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
         if (p.getOrdinat() == 1){
-            arena.row1[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
+			if (arena.row1[p.getAbsis()-1] == ' ') {
+				arena.row1[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt);
+				return true;
+			} else {
+				return false;
+			}
         } else if (p.getOrdinat() == 2){
-            arena.row2[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
+			if (arena.row2[p.getAbsis()-1] == ' ') {
+				arena.row2[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt);
+				return true;
+			} else {
+				return false;
+			}
         } else if (p.getOrdinat() == 3){
-            arena.row3[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
+			if (arena.row3[p.getAbsis()-1] == ' ') {
+				arena.row3[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt);
+				return true;
+			} else {
+				return false;
+			}
         } else if (p.getOrdinat() == 4){
-            arena.row4[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
+			if (arena.row4[p.getAbsis()-1] == ' ') {
+				arena.row4[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt);
+				return true;
+			} else {
+				return false;
+			}
         } else {
             System.out.println("Titik tidak valid");
+			return false;
         }
     }
     

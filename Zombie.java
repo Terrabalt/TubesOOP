@@ -18,12 +18,20 @@ public abstract class Zombie extends Element{
     public void setLife(int life){
         this.life = life;
     }
-
-    public void walk(int distance){
+	public abstract void walk();
+	
+    protected void walk(int distance){
         Point p = super.getOrigin();
         p.translate(-distance,0);
-        Game.moveElement(this, p);
-        super.setOrigin(p);
+        while (distance > 0) {
+			if (Game.moveElement(this, p)) {
+				super.setOrigin(p);
+				distance = 0;
+			} else {
+				distance--;
+				p.translate(-1,0);
+			}
+		}
     }
 
     // public void eat (Plant p);
