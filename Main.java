@@ -14,7 +14,11 @@ class Main {
     Game.arena.printArena();
     game.addZombies();
     Game.arena.printArena();
-    game.addZombies();
+	Game.skip();
+    Game.arena.printArena();
+	Game.skip();
+    Game.arena.printArena();
+/*    game.addZombies();
     Game.arena.printArena();
     game.addZombies();
     Game.arena.printArena();
@@ -25,7 +29,7 @@ class Main {
     game.addZombies();
     Game.arena.printArena();
     
-/*      int x = input.nextInt();
+      int x = input.nextInt();
       int y = input.nextInt();
       String type = input.next();
       if (type.equals("pea")){

@@ -1,10 +1,12 @@
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game{
     public static Arena arena;
     public static int sunflowerPoints;
-    public static Zombie[] zombies; //dibuat generic(?)
-    public static Plant[] plants; //dibuat generic(?)
+    public static List<Zombie> zombies; //dibuat generic(?)
+    public static List<Plant> plants; //dibuat generic(?)
     public static boolean end;
 
     // public int getSunflowerPoints(){
@@ -19,8 +21,8 @@ public class Game{
     public Game(){
         Game.arena = new Arena();
         sunflowerPoints = 0;
-        zombies = new Zombie[240]; //buat generic euy
-        plants = new Plant[240]; //buat generic euy
+        zombies = new ArrayList<Zombie>(); //buat generic euy
+        plants = new ArrayList<Plant>(); //buat generic euy
         end = false;
     }
 
@@ -36,38 +38,49 @@ public class Game{
     }
 
     public static void skip(){
-        for (int i=0; i<240; i++){
-            zombies[i].walk();
+            System.out.print("Menjalankan zombie-zombie");
+        for (Zombie zombie : zombies){
+            zombie.walk();
         }
+            System.out.println("");
     }
 
-    public static void addElement(Element elmt){
+    public static boolean addElement(Element elmt){
         if (elmt.getOrigin().getOrdinat() == 1){
             if (arena.row1[elmt.getOrigin().getAbsis()-1] == ' '){
                 arena.row1[elmt.getOrigin().getAbsis()-1] = elmt.getShow();
+				return true;
             } else {
                 System.out.println("Sudah terisi");
+				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 2){
             if (arena.row2[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
+                arena.row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
             } else {
                 System.out.println("Sudah terisi");
+				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 3){
             if (arena.row3[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
+                arena.row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
             } else {
                 System.out.println("Sudah terisi");
+				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 4){
             if (arena.row4[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
+                arena.row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
             } else {
                 System.out.println("Sudah terisi");
+				return false;
             }
         } else {
             System.out.println("Masukan ordinat tidak valid");
+			return false;
         }
     }
 
@@ -146,7 +159,9 @@ public class Game{
         } else {
             zombie = new RobotZombie(59, randomNumb+1);
         }
-        addElement(zombie);            
+        if (addElement(zombie)) {
+			zombies.add(zombie);
+		}            
     }
 
     }
