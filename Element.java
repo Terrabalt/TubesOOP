@@ -18,6 +18,8 @@ public abstract class Element{
         return o;
     }
     
+	public abstract void update();
+	
     public char getShow(){
         return show;
     }

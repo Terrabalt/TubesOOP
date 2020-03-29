@@ -5,8 +5,7 @@ import java.util.List;
 public class Game{
     public static Arena arena;
     public static int sunflowerPoints;
-    public static List<Zombie> zombies; //dibuat generic(?)
-    public static List<Plant> plants; //dibuat generic(?)
+    public static List<Element> elements;
     public static boolean end;
 
     // public int getSunflowerPoints(){
@@ -21,8 +20,7 @@ public class Game{
     public Game(){
         Game.arena = new Arena();
         sunflowerPoints = 0;
-        zombies = new ArrayList<Zombie>(); //buat generic euy
-        plants = new ArrayList<Plant>(); //buat generic euy
+        elements = new ArrayList<Element>();
         end = false;
     }
 
@@ -38,102 +36,28 @@ public class Game{
     }
 
     public static void skip(){
-            System.out.print("Menjalankan zombie-zombie");
-        for (Zombie zombie : zombies){
-            zombie.walk();
+		List<Element> cElements = new ArrayList<Element>(elements);
+        for (Element element : cElements){
+            element.update();
         }
-            System.out.println("");
     }
 
-    public static boolean addElement(Element elmt){
-        if (elmt.getOrigin().getOrdinat() == 1){
-            if (arena.row1[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row1[elmt.getOrigin().getAbsis()-1] = elmt.getShow();
-				return true;
-            } else {
-                System.out.println("Sudah terisi");
-				return false;
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 2){
-            if (arena.row2[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
-				return true; 
-            } else {
-                System.out.println("Sudah terisi");
-				return false;
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 3){
-            if (arena.row3[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
-				return true; 
-            } else {
-                System.out.println("Sudah terisi");
-				return false;
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 4){
-            if (arena.row4[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
-				return true; 
-            } else {
-                System.out.println("Sudah terisi");
-				return false;
-            }
-        } else {
-            System.out.println("Masukan ordinat tidak valid");
-			return false;
-        }
+    public static void addElement(Element elmt){
+        if (arena.addElement(elmt)) {
+			elements.add(elmt);
+		}
     }
 
     public static void deleteElement(Element elmt){
-        if (elmt.getOrigin().getOrdinat() == 1){
-            arena.row1[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 2){
-            arena.row2[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 3){
-            arena.row3[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 4){
-            arena.row4[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else {}
+		if (elements.contains(elmt)) {
+			arena.deleteElement(elmt.getOrigin());
+			elements.remove(elmt);
+		}
     }
-
+	
     public static boolean moveElement(Element elmt, Point p){ 
 	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
-        if (p.getOrdinat() == 1){
-			if (arena.row1[p.getAbsis()-1] == ' ') {
-				arena.row1[p.getAbsis()-1] = elmt.getShow();
-				deleteElement(elmt);
-				return true;
-			} else {
-				return false;
-			}
-        } else if (p.getOrdinat() == 2){
-			if (arena.row2[p.getAbsis()-1] == ' ') {
-				arena.row2[p.getAbsis()-1] = elmt.getShow();
-				deleteElement(elmt);
-				return true;
-			} else {
-				return false;
-			}
-        } else if (p.getOrdinat() == 3){
-			if (arena.row3[p.getAbsis()-1] == ' ') {
-				arena.row3[p.getAbsis()-1] = elmt.getShow();
-				deleteElement(elmt);
-				return true;
-			} else {
-				return false;
-			}
-        } else if (p.getOrdinat() == 4){
-			if (arena.row4[p.getAbsis()-1] == ' ') {
-				arena.row4[p.getAbsis()-1] = elmt.getShow();
-				deleteElement(elmt);
-				return true;
-			} else {
-				return false;
-			}
-        } else {
-            System.out.println("Titik tidak valid");
-			return false;
-        }
+        return arena.moveElement(elmt, p);
     }
     
     public void addPlants(int x, int y, char type){
@@ -159,9 +83,7 @@ public class Game{
         } else {
             zombie = new RobotZombie(59, randomNumb+1);
         }
-        if (addElement(zombie)) {
-			zombies.add(zombie);
-		}            
+        addElement(zombie);      
     }
 
     }

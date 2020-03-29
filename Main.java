@@ -1,4 +1,5 @@
 import java.util.Scanner;  // Import the Scanner class
+import java.util.Random;
 
 class Main {
   public static void main(String[] args) {
@@ -13,6 +14,26 @@ class Main {
     game.addZombies();
     Game.arena.printArena();
     game.addZombies();
+    Game.arena.printArena();
+	
+    Random random = new Random();
+    int randomX = random.nextInt(10) + 1;
+    int randomY = random.nextInt(4) + 1;
+	int randomPType = random.nextInt(2);
+	if (randomPType == 1) {
+		game.addPlants(randomX, randomY,'p');
+	} else {
+		game.addPlants(randomX, randomY,'s');		
+	}
+    Game.arena.printArena();
+    randomX = random.nextInt(10) + 1;
+    randomY = random.nextInt(4) + 1;
+	randomPType = random.nextInt(2);
+	if (randomPType == 1) {
+		game.addPlants(randomX, randomY,'p');
+	} else {
+		game.addPlants(randomX, randomY,'s');		
+	}
     Game.arena.printArena();
 	Game.skip();
     Game.arena.printArena();

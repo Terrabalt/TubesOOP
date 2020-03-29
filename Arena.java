@@ -32,7 +32,98 @@ public class Arena{
             row4[i] = ' ';            
         }
     }
+	
+	public boolean addElement(Element elmt){
+        if (elmt.getOrigin().getOrdinat() == 1){
+            if (row1[elmt.getOrigin().getAbsis()-1] == ' '){
+                row1[elmt.getOrigin().getAbsis()-1] = elmt.getShow();
+				return true;
+            } else {
+                System.out.println("Sudah terisi");
+				return false;
+            }
+        } else if (elmt.getOrigin().getOrdinat() == 2){
+            if (row2[elmt.getOrigin().getAbsis()-1] == ' '){
+                row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
+            } else {
+                System.out.println("Sudah terisi");
+				return false;
+            }
+        } else if (elmt.getOrigin().getOrdinat() == 3){
+            if (row3[elmt.getOrigin().getAbsis()-1] == ' '){
+                row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
+            } else {
+                System.out.println("Sudah terisi");
+				return false;
+            }
+        } else if (elmt.getOrigin().getOrdinat() == 4){
+            if (row4[elmt.getOrigin().getAbsis()-1] == ' '){
+                row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+				return true; 
+            } else {
+                System.out.println("Sudah terisi");
+				return false;
+            }
+        } else {
+            System.out.println("Masukan ordinat tidak valid");
+			return false;
+        }
+    }
 
+	public  void deleteElement(Point p){
+        if (p.getOrdinat() == 1){
+            row1[p.getAbsis()-1] = ' ';
+        } else if (p.getOrdinat() == 2){
+            row2[p.getAbsis()-1] = ' ';
+        } else if (p.getOrdinat() == 3){
+            row3[p.getAbsis()-1] = ' ';
+        } else if (p.getOrdinat() == 4){
+            row4[p.getAbsis()-1] = ' ';
+        }
+    }
+	
+    public  boolean moveElement(Element elmt, Point p){ 
+	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
+        if (p.getOrdinat() == 1){
+			if (row1[p.getAbsis()-1] == ' ') {
+				row1[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt.getOrigin());
+				return true;
+			} else {
+				return false;
+			}
+        } else if (p.getOrdinat() == 2){
+			if (row2[p.getAbsis()-1] == ' ') {
+				row2[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt.getOrigin());
+				return true;
+			} else {
+				return false;
+			}
+        } else if (p.getOrdinat() == 3){
+			if (row3[p.getAbsis()-1] == ' ') {
+				row3[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt.getOrigin());
+				return true;
+			} else {
+				return false;
+			}
+        } else if (p.getOrdinat() == 4){
+			if (row4[p.getAbsis()-1] == ' ') {
+				row4[p.getAbsis()-1] = elmt.getShow();
+				deleteElement(elmt.getOrigin());
+				return true;
+			} else {
+				return false;
+			}
+        } else {
+            System.out.println("Titik tidak valid");
+			return false;
+        }
+    }
+	
     public void printArena(){
         //line 1
         for (int i= 0; i < 60; i++ ){

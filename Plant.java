@@ -18,8 +18,6 @@ public abstract class Plant extends Element{
     public void setLife(int life){
         this.life = life;
     }
-    
-	public abstract void shoot();
 	
     protected void shoot(int power){
         Bullet bullet = new Bullet(power,super.getOrigin().getAbsis()+1, super.getOrigin().getOrdinat());
