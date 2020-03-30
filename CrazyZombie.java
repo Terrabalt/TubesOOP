@@ -5,7 +5,7 @@ public class CrazyZombie extends Zombie{
         super.setShow('C');
     }
     
-    public void walk(){
+    public void update(){
         super.walk(2);
     }
 }

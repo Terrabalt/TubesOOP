@@ -20,15 +20,15 @@ public class Bullet extends Element{
     public void setPower(int power){
         this.power = power;
     }
-    
+    public void update() {
+		fly(2);
+	}
     public void fly(int distance){
         Point p = super.getOrigin();
-        p.translate(-distance,0);
-        if (Game.arena.getArray(p) != ' '){
-            
-        }
-        Game.moveElement(this, p);
-        super.setOrigin(p);        
+        p.translate(distance,0);
+		if (Game.moveElement(this, p)) {
+			super.setOrigin(p);
+        }    
     }
 
 //    public void kill(Zombie z);

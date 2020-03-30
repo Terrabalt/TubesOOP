@@ -46,7 +46,12 @@ public class Point {
     public double distance(Point p) {
       return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
     }
-
+	
+	// Menghasilkan true jika posisi sama dengan Point argumen
+	public boolean equals(Point p) {
+		return this.x == p.x && this.y == p.y;
+	}
+	
     // Menuliskan titik ke layar dengan format "(x,y)"
     public void print() {
       System.out.println("(" + this.x + "," + this.y + ")");

@@ -1,10 +1,11 @@
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game{
     public static Arena arena;
     public static int sunflowerPoints;
-    public static Box<Zombie> zombies; //dibuat generic(?)
-    public static Box<Plant> plants; //dibuat generic(?)
+    public static List<Element> elements;
     public static boolean end;
 
     // public int getSunflowerPoints(){
@@ -19,9 +20,7 @@ public class Game{
     public Game(){
         Game.arena = new Arena();
         sunflowerPoints = 0;
-
-//        zombies = new Zombie[240]; //buat generic euy
-//        plants = new Plant[240]; //buat generic euy
+        elements = new ArrayList<Element>();
         end = false;
     }
 
@@ -37,69 +36,28 @@ public class Game{
     }
 
     public static void skip(){
-        for (int i=0; i<240; i++){
-//            zombies[i].walk(); gimana pake genericnya :( )
+		List<Element> cElements = new ArrayList<Element>(elements);
+        for (Element element : cElements){
+            element.update();
         }
     }
 
     public static void addElement(Element elmt){
-        if (elmt.getOrigin().getOrdinat() == 1){
-            if (arena.row1[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row1[elmt.getOrigin().getAbsis()-1] = elmt.getShow();
-            } else {
-                System.out.println("Sudah terisi");
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 2){
-            if (arena.row2[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
-            } else {
-                System.out.println("Sudah terisi");
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 3){
-            if (arena.row3[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
-            } else {
-                System.out.println("Sudah terisi");
-            }
-        } else if (elmt.getOrigin().getOrdinat() == 4){
-            if (arena.row4[elmt.getOrigin().getAbsis()-1] == ' '){
-                arena.row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();   
-            } else {
-                System.out.println("Sudah terisi");
-            }
-        } else {
-            System.out.println("Masukan ordinat tidak valid");
-        }
+        if (arena.addElement(elmt)) {
+			elements.add(elmt);
+		}
     }
 
     public static void deleteElement(Element elmt){
-        if (elmt.getOrigin().getOrdinat() == 1){
-            arena.row1[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 2){
-            arena.row2[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 3){
-            arena.row3[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else if (elmt.getOrigin().getOrdinat() == 4){
-            arena.row4[elmt.getOrigin().getAbsis()-1] = ' ';
-        } else {}
+		if (elements.contains(elmt)) {
+			arena.deleteElement(elmt.getOrigin());
+			elements.remove(elmt);
+		}
     }
-
-    public static void moveElement(Element elmt, Point p){ //tambahin syarat kalau depannya ada sesuatu?
-        if (p.getOrdinat() == 1){
-            arena.row1[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
-        } else if (p.getOrdinat() == 2){
-            arena.row2[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
-        } else if (p.getOrdinat() == 3){
-            arena.row3[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
-        } else if (p.getOrdinat() == 4){
-            arena.row4[p.getAbsis()-1] = elmt.getShow();
-            deleteElement(elmt);
-        } else {
-            System.out.println("Titik tidak valid");
-        }
+	
+    public static boolean moveElement(Element elmt, Point p){ 
+	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
+        return arena.moveElement(elmt, p);
     }
     
     public void addPlants(int x, int y, char type){
@@ -125,7 +83,7 @@ public class Game{
         } else {
             zombie = new RobotZombie(59, randomNumb+1);
         }
-        addElement(zombie);            
+        addElement(zombie);      
     }
 
     }

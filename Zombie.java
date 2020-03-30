@@ -18,17 +18,22 @@ public abstract class Zombie extends Element{
     public void setLife(int life){
         this.life = life;
     }
-
-    public void walk(int distance){
-        
+	public void walk() {
+		walk(1);
+	}
+	
+    protected void walk(int distance){
         Point p = super.getOrigin();
         p.translate(-distance,0);
-        if (Game.arena.getArray(p) == ' '){
-            Game.moveElement(this, p);
-            super.setOrigin(p);            
-        } else if ((Game.arena.getArray(p) == 'P') || (Game.arena.getArray(p) == 'S')){
-            Game.plants<>
-        }
+        while (distance > 0) {
+			if (Game.moveElement(this, p)) {
+				super.setOrigin(p);
+				distance = 0;
+			} else {
+				distance--;
+				p.translate(1,0);
+			}
+		}
     }
 
     // public void eat (Plant p);

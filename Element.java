@@ -12,9 +12,14 @@ public abstract class Element{
     }
     
     public Point getOrigin(){
-        return origin;
+		Point o = new Point(0,0);
+		o.setAbsis(origin.getAbsis());
+		o.setOrdinat(origin.getOrdinat());
+        return o;
     }
     
+	public abstract void update();
+	
     public char getShow(){
         return show;
     }
