@@ -24,21 +24,20 @@ public class Game{
         end = false;
     }
 
-    public static void begin(){
+    public static void skip(){
         while (!end){
-            if ((arena.row1[0] == 'C') || (arena.row1[0] == 'R') || (arena.row2[0] == 'C') || (arena.row2[0] == 'R') || (arena.row3[0] == 'C') || (arena.row3[0] == 'R') || (arena.row4[0] == 'C') || (arena.row4[0] == 'R')){ // cek ada zombie diujung ato ngga
+            if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
                 end = true;
                 break;
-            } else {}
+            } else {
+                List<Element> cElements = new ArrayList<Element>(elements);
+                for (Element element : cElements){
+                    element.update();
+                }
+                addZombies();
+            }
             
-            
-        }
-    }
-
-    public static void skip(){
-		List<Element> cElements = new ArrayList<Element>(elements);
-        for (Element element : cElements){
-            element.update();
+        
         }
     }
 
@@ -60,12 +59,12 @@ public class Game{
         return arena.moveElement(elmt, p);
     }
     
-    public void addPlants(int x, int y, char type){
+    public static void addPlants(int x, int y, String type){
         Plant plant;
-        if ((type == 'P') || (type == 'p')){
+        if (type.equals("P") || (type.equals("p"))){
             plant = new PeaShooter(x, y);
             addElement(plant);
-        } else if ((type == 'S') || (type == 's')){
+        } else if (type.equals("S") || (type.equals("s"))){
             plant = new SnowPea(x,y);
             addElement(plant);
         } else {
@@ -73,7 +72,7 @@ public class Game{
         }
     }
 
-    public void addZombies(){
+    public static void addZombies(){
         Random random = new Random();
         int randomNumb = random.nextInt(4);
         int randomZombie = random.nextInt(2);
@@ -86,4 +85,12 @@ public class Game{
         addElement(zombie);      
     }
 
+    public static void printCommand(){
+        System.out.println("COMMAND :");
+        System.out.println("SKIP");
+        System.out.println("ADDPLANT <row> <distance> <type>");
+        System.out.println("row : 1 - 4 from top to bottom");
+        System.out.println("distance : 1 - 59 from left to right");
+        System.out.println("Type : P for PeaShooter ; S for SnowPea");
+    }
     }
