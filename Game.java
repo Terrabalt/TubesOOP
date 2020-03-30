@@ -3,8 +3,8 @@ import java.util.Random;
 public class Game{
     public static Arena arena;
     public static int sunflowerPoints;
-    public static Zombie[] zombies; //dibuat generic(?)
-    public static Plant[] plants; //dibuat generic(?)
+    public static Box<Zombie> zombies; //dibuat generic(?)
+    public static Box<Plant> plants; //dibuat generic(?)
     public static boolean end;
 
     // public int getSunflowerPoints(){
@@ -19,8 +19,9 @@ public class Game{
     public Game(){
         Game.arena = new Arena();
         sunflowerPoints = 0;
-        zombies = new Zombie[240]; //buat generic euy
-        plants = new Plant[240]; //buat generic euy
+
+//        zombies = new Zombie[240]; //buat generic euy
+//        plants = new Plant[240]; //buat generic euy
         end = false;
     }
 
@@ -30,7 +31,7 @@ public class Game{
                 end = true;
                 break;
             } else {}
-
+            
             
         }
     }

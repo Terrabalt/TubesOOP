@@ -80,4 +80,24 @@ public class Arena{
         }
         System.out.print('\n');
     }
+
+    public char getArray (int x, int y){
+        char[] arr = new char[60];
+        if (x == 1){
+            arr = row1;
+        } else if (x == 2){
+            arr = row2;
+        } else if (x == 3){
+            arr = row3;
+        } else if (x == 4){
+            arr = row4;
+        } else {} 
+        return arr[y-1];
+    }
+
+    public char getArray (Point p){
+        int x = p.getAbsis();
+        int y = p.getOrdinat();
+        return getArray(x, y);
+    }
 }

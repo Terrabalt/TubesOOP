@@ -20,10 +20,15 @@ public abstract class Zombie extends Element{
     }
 
     public void walk(int distance){
+        
         Point p = super.getOrigin();
         p.translate(-distance,0);
-        Game.moveElement(this, p);
-        super.setOrigin(p);
+        if (Game.arena.getArray(p) == ' '){
+            Game.moveElement(this, p);
+            super.setOrigin(p);            
+        } else if ((Game.arena.getArray(p) == 'P') || (Game.arena.getArray(p) == 'S')){
+            Game.plants<>
+        }
     }
 
     // public void eat (Plant p);
@@ -35,7 +40,7 @@ public abstract class Zombie extends Element{
         } else {
             setLife(0);
         }
-        if (life == 0){
+        if (life == 0){ 
             Game.deleteElement(this);
         }
     } 
