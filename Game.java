@@ -19,7 +19,7 @@ public class Game{
 
     public Game(){
         Game.arena = new Arena();
-        sunflowerPoints = 0;
+        sunflowerPoints = 10000;
         elements = new ArrayList<Element>();
         end = false;
     }

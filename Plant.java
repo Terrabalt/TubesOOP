@@ -1,20 +1,27 @@
 public abstract class Plant extends Element{
     private int life;
+    private int price;
 
-    public Plant(int life,int x,int y){
+    public Plant(int life, int price, int x,int y){
         super(x,y);
         this.life = life;
+        this.price = price;
     }
 
-    public Plant(int life, Point p){
+    public Plant(int life, int price, Point p){
         super(p);
         this.life = life;
+        this.price = price;
     }
 
     public int getLife(){
         return life;
     }
 
+    public int getPrice(){
+        return price;
+    }
+    
     public void setLife(int life){
         this.life = life;
     }
