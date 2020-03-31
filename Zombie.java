@@ -1,9 +1,11 @@
 public abstract class Zombie extends Element{
     private int life;
+    protected int distance;
 
-    public Zombie(int life, int x, int y){
+    public Zombie(int life, int distance, int x, int y){
         super(x,y);
         this.life = life;
+        this.distance = distance;
     }
 
     public Zombie(int life, Point p){
@@ -18,6 +20,16 @@ public abstract class Zombie extends Element{
     public void setLife(int life){
         this.life = life;
     }
+
+    
+    public int getDistance(){
+        return distance;
+    }
+
+    public void setDistance(int dist){
+        distance = dist;
+    }
+    
 	public void walk() {
 		walk(1);
 	}
@@ -39,7 +51,7 @@ public abstract class Zombie extends Element{
     // public void eat (Plant p);
         
     public void shot(int power){
-        if (life >= power){
+        if ((life-power) > power){
             setLife(getLife()-power);
             Game.sunflowerPoints += 1;
         } else {

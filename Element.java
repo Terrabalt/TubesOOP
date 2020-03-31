@@ -10,7 +10,12 @@ public abstract class Element{
         Point point = new Point(x,y);
         this.origin = point;
     }
-    
+
+    public Element(Point origin, char show){
+        this.origin = origin;
+        this.show = show;
+    }
+
     public Point getOrigin(){
 		Point o = new Point(0,0);
 		o.setAbsis(origin.getAbsis());
@@ -35,9 +40,4 @@ public abstract class Element{
     public void setOrigin(Point point){
         origin = point;
     }
-    
-
-
-
-
 }

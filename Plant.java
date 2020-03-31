@@ -28,11 +28,14 @@ public abstract class Plant extends Element{
 	
     protected void shoot(int power){
         Bullet bullet = new Bullet(power,super.getOrigin().getAbsis()+1, super.getOrigin().getOrdinat());
-        Game.addElement(bullet);
+        if (Game.addElement(bullet)){
+            Game.bulletList.add(bullet);
+        }
+
     }
 
     public void eaten(int power){
-        if (life >= power){
+        if ((life-power) > power){
             setLife(getLife()-power);
         } else {
             setLife(0);
@@ -41,7 +44,4 @@ public abstract class Plant extends Element{
             Game.deleteElement(this);
         }
     }
-
-
-    
 }

@@ -21,14 +21,33 @@ public class Bullet extends Element{
         this.power = power;
     }
     public void update() {
-		fly(2);
+        fly(10);
 	}
     public void fly(int distance){
+        //Element temp = this;
+        boolean isShot = false;
         Point p = super.getOrigin();
+        //Point pBfr = p;
+        if ((p.getAbsis()+distance) >58){
+            distance = 58 - p.getAbsis();
+        }
         p.translate(distance,0);
 		if (Game.moveElement(this, p)) {
-			super.setOrigin(p);
-        }    
+            for (int i = 0; i < Game.zombieList.size(); i++){
+                if ((Game.zombieList.get(i).getOrigin().getAbsis() - Game.zombieList.get(i).getDistance()) <p.getAbsis()){
+                    Game.zombieList.get(i).shot(this.getPower());
+                    System.out.println(Game.zombieList.get(i).getLife());
+                    break;
+                }
+            }
+            super.setOrigin(p);
+        }
+        if (p.getAbsis() == 58){
+            Game.deleteElement(this);
+            //Game.bulletList.remove(this);
+        }
+        System.out.println("Bullet: "+Game.bulletList.size());
+        // Game.bulletList.remove(this);
     }
 
 //    public void kill(Zombie z);

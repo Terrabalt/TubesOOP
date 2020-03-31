@@ -1,11 +1,11 @@
 public class RobotZombie extends Zombie{
     
     public RobotZombie(int x, int y){
-        super(6,x,y);
+        super(25,5,x,y);
         super.setShow('R');
     }
     
     public void update(){
-        super.walk(4);
+        super.walk(distance);
     }
 }
