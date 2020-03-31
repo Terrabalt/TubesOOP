@@ -6,12 +6,18 @@ class Main {
     Scanner input = new Scanner(System.in);  // Create a Scanner object
     
     Game game = new Game();
+    System.out.println("");
+    for (int i = 1; i < 60; i++){
+      System.out.print("=");
+    }
+    System.out.println("=");
+    System.out.println("");
     System.out.println("WELCOME TO PLANT VS ZOMBIES");
     System.out.println("LET'S START THE GAME, SHALL WE?");
     System.out.println("");
-    System.out.println("");
     Game.arena.printArena();
     System.out.println("Sunflower Points = " + Game.sunflowerPoints);
+    System.out.println("");
     while (!Game.end){
       Game.printCommand();
       String str = input.next();
@@ -26,9 +32,9 @@ class Main {
       } else {
           System.out.println("Command salah!");
       }    
+      Game.sunflowerPoints += 50;
       Game.arena.printArena();
       System.out.println("Sunflower Points = " + Game.sunflowerPoints);
-      System.out.println("");
       System.out.println("");
     }
     if (Game.end){

@@ -8,14 +8,14 @@ public class Game{
     public static List<Element> elements;
     public static boolean end;
 
-    // public int getSunflowerPoints(){
-    //     return sunflowerPoints;
-    // }
+    public int getSunflowerPoints(){
+        return sunflowerPoints;
+    }
 
 
-    // public void setSunflowerPoints(int score){
-    //     sunflowerPoints = score;
-    // }
+    public void setSunflowerPoints(int score){
+        sunflowerPoints = score;
+    }
 
     public Game(){
         Game.arena = new Arena();
@@ -25,10 +25,9 @@ public class Game{
     }
 
     public static void skip(){
-        while (!end){
+        if (!end){
             if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
                 end = true;
-                break;
             } else {
                 List<Element> cElements = new ArrayList<Element>(elements);
                 for (Element element : cElements){
@@ -55,7 +54,6 @@ public class Game{
 			arena.deleteElement(elmt.getOrigin());
 			elements.remove(elmt);
 			if (elmt.getShow() == 'R' || elmt.getShow() == 'C') {
-				sunflowerPoints += 50;
 			} 
 		}
     }
