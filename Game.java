@@ -5,82 +5,53 @@ import java.util.List;
 public class Game{
     public static Arena arena;
     public static int sunflowerPoints;
-    public static List<Plant> plantList;
-    public static List<Zombie> zombieList;
-    public static List<Bullet> bulletList;
+    public static List<Element> elements;
     public static boolean end;
 
-    public int getSunflowerPoints(){
-        return sunflowerPoints;
-    }
+    // public int getSunflowerPoints(){
+    //     return sunflowerPoints;
+    // }
 
-    public void setSunflowerPoints(int score){
-        sunflowerPoints = score;
-    }
+
+    // public void setSunflowerPoints(int score){
+    //     sunflowerPoints = score;
+    // }
 
     public Game(){
         Game.arena = new Arena();
-        sunflowerPoints = 3000;
-        plantList = new ArrayList<Plant>();
-        zombieList = new ArrayList<Zombie>();
-        bulletList = new ArrayList<Bullet>();
+        sunflowerPoints = 10000;
+        elements = new ArrayList<Element>();
         end = false;
     }
 
     public static void skip(){
-        if (!end){
+        while (!end){
             if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
                 end = true;
+                break;
             } else {
-                for (Element element : plantList){
+                List<Element> cElements = new ArrayList<Element>(elements);
+                for (Element element : cElements){
                     element.update();
                 }
-                for (Element element : zombieList){
-                    element.update();
-                }
-                for (Element element : bulletList){
-                    element.update();
-                }
+                addZombies();
             }
+            
+        
         }
     }
 
-    public static boolean addElement(Element elmt){
+    public static void addElement(Element elmt){
         if (arena.addElement(elmt)) {
-            return true;
-            /*
-            Character showElmt = elmt.getShow();
-            if (showElmt.equals('P') || showElmt.equals('S')){
-                plantList.add(elmt);
-            } else if (showElmt.equals('R') || showElmt.equals('C')){
-                zombieList.add(elmt);
-            } else if (showElmt.equals('-')){
-                bulletList.add(elmt);
-            }
-            */
-		} else {
-            return false;
-        }
+			elements.add(elmt);
+		}
     }
 
     public static void deleteElement(Element elmt){
-        Character showElmt = elmt.getShow();
-        if (showElmt.equals("P") || showElmt.equals("S")){
-            if (plantList.contains(elmt)) {
-                arena.deleteElement(elmt.getOrigin());
-                plantList.remove(elmt);
-            }
-        } else if (showElmt.equals("R") || showElmt.equals("C")){
-            if (zombieList.contains(elmt)) {
-                arena.deleteElement(elmt.getOrigin());
-                zombieList.remove(elmt);
-            }
-        } else if (showElmt.equals("-")){
-            if (bulletList.contains(elmt)) {
-                arena.deleteElement(elmt.getOrigin());
-                bulletList.remove(elmt);
-            }
-        }
+		if (elements.contains(elmt)) {
+			arena.deleteElement(elmt.getOrigin());
+			elements.remove(elmt);
+		}
     }
 	
     public static boolean moveElement(Element elmt, Point p){ 
@@ -92,18 +63,10 @@ public class Game{
         Plant plant;
         if (type.equals("P") || (type.equals("p"))){
             plant = new PeaShooter(x, y);
-            if (Game.addElement(plant)){
-                plantList.add(plant);
-            } else {
-                System.out.println("Tidak dapat menambah Pea");
-            }
+            addElement(plant);
         } else if (type.equals("S") || (type.equals("s"))){
             plant = new SnowPea(x,y);
-            if (Game.addElement(plant)){
-                plantList.add(plant);
-            } else{
-                System.out.println("Tidak dapat menambah SnowPea");
-            }
+            addElement(plant);
         } else {
             System.out.println("Input tipe salah");
         }
@@ -115,22 +78,19 @@ public class Game{
         int randomZombie = random.nextInt(2);
         Zombie zombie;
         if (randomZombie == 0){
-            zombie = new CrazyZombie(58, randomNumb+1);
+            zombie = new CrazyZombie(59, randomNumb+1);
         } else {
-            zombie = new RobotZombie(58, randomNumb+1);
+            zombie = new RobotZombie(59, randomNumb+1);
         }
-        if (Game.addElement(zombie)){
-            zombieList.add(zombie);
-        }
+        addElement(zombie);      
     }
 
     public static void printCommand(){
         System.out.println("COMMAND :");
-        System.out.println("PLAY");
         System.out.println("SKIP");
-        System.out.println("PEA for PeaShooter");
-        System.out.println("SNOWPEA for SnowPea");
-        System.out.println("<row> : 1 - 4 from top to bottom");
-        System.out.println("<distance> : 1 - 58 from left to right");
+        System.out.println("ADDPLANT <row> <distance> <type>");
+        System.out.println("row : 1 - 4 from top to bottom");
+        System.out.println("distance : 1 - 59 from left to right");
+        System.out.println("Type : P for PeaShooter ; S for SnowPea");
     }
-}
+    }
