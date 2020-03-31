@@ -27,6 +27,7 @@ public class Game{
         end = false;
     }
 
+    /*
     public static void skip(){
         if (!end){
             if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
@@ -81,17 +82,66 @@ public class Game{
                 bulletList.remove(elmt);
             }
         }
+        */
+    public static void skip() { 
+        List<Element> cElements = new ArrayList<Element>(elements);
+        for (Element element : cElements){
+			if (elements.contains(element)) {
+				element.update();
+			}
+        }
+        addZombies();
+        if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
+            end = true;
+        }
+    }
+
+    public static void addElement(Element elmt, boolean mustNotOverlap){
+		if (mustNotOverlap) {
+			if (arena.addElement(elmt)) {
+				elements.add(elmt);
+			}
+		} else {
+			elements.add(elmt);
+			arena.addElement(elmt);
+		}
+    }
+
+    public static void deleteElement(Element elmt){
+		if (elements.contains(elmt)) {
+			arena.deleteElement(elmt.getOrigin());
+			elements.remove(elmt);
+			if (elmt.getShow() == 'R' || elmt.getShow() == 'C') {
+				sunflowerPoints += 50;
+			} 
+		}
     }
 	
-    public static boolean moveElement(Element elmt, Point p){ 
+    public static boolean moveElement(Element elmt, Point p, boolean mustNotOverlap) { 
 	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
-        return arena.moveElement(elmt, p);
+		if (mustNotOverlap) {
+			return arena.moveElement(elmt, p);
+		} else {
+			arena.moveElement(elmt, p);
+			return true;
+		}
     }
+	
+	public static List<Element> getElements(Point p) {
+        List<Element> cElements = new ArrayList<Element>();
+        for (Element element : elements){
+            if(element.getOrigin().equals(p)) {
+				cElements.add(element);
+			}
+        }
+		return cElements;		
+	}
     
     public static void addPlants(int x, int y, String type){
         Plant plant;
         if (type.equals("P") || (type.equals("p"))){
             plant = new PeaShooter(x, y);
+            /*
             if (Game.addElement(plant)){
                 plantList.add(plant);
             } else {
@@ -104,6 +154,17 @@ public class Game{
             } else{
                 System.out.println("Tidak dapat menambah SnowPea");
             }
+            */
+            addElement(plant, true);
+			if (!elements.contains(plant)) {
+				sunflowerPoints += 350;
+			}
+        } else if (type.equals("S") || (type.equals("s"))){
+            plant = new SnowPea(x,y);
+            addElement(plant, true);
+			if (!elements.contains(plant)) {
+				sunflowerPoints += 600;
+			}
         } else {
             System.out.println("Input tipe salah");
         }
@@ -118,10 +179,13 @@ public class Game{
             zombie = new CrazyZombie(58, randomNumb+1);
         } else {
             zombie = new RobotZombie(58, randomNumb+1);
-        }
+        /*}
         if (Game.addElement(zombie)){
             zombieList.add(zombie);
         }
+        }
+        addElement(zombie, true);  
+        */    
     }
 
     public static void printCommand(){
