@@ -25,13 +25,29 @@ public class Bullet extends Element{
 	}
     public void fly(int distance){
         Point p = super.getOrigin();
-        p.translate(distance,0);
-		if(p.getAbsis() >= 60) {
-			Game.deleteElement(this);
-		} else
-		if (Game.moveElement(this, p, false)) {
-			super.setOrigin(p);
-        }    
+        while (distance > 0) {
+			p.translate(1, 0);
+			distance--;
+			if (!Game.moveElement(this, p, true)) {
+				if (Zombie.containsZombie(Game.getElements(p))) { //
+					distance = 0;
+					for (Element e : Game.getElements(p)) {
+						if (Zombie.isZombie(e)) {
+							((Zombie)e).shot(power);
+						}
+					}
+					Game.deleteElement(this);
+				} else {
+					Game.moveElement(this, p, false);
+					super.setOrigin(p);					
+				}
+			} else {
+				super.setOrigin(p);
+			}
+			if (p.getAbsis() >= 60) {
+				distance = 0;
+			}
+		}
     }
 
 //    public void kill(Zombie z);

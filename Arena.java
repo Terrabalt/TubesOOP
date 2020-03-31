@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Arena{
 
     public char[] row1; 
@@ -33,34 +35,67 @@ public class Arena{
         }
     }
 	
-	public boolean addElement(Element elmt){
+	void checkArray() {
+        for (int i= 1; i < 59; i++ ){
+            row1[i] = ' ';            
+            row2[i] = ' ';           
+            row3[i] = ' ';         
+            row4[i] = ' ';              
+        }
+		Point p; char c;
+        for (Element element : Game.elements){
+            p = element.getOrigin();
+			c = element.getShow();
+			if (p.getOrdinat() == 1) {
+				if (c != '-' || (c == '-' && row1[p.getAbsis()] == ' ')) {
+					row1[p.getAbsis()] = c;
+				}
+			} else if (p.getOrdinat() == 2) {
+				if (c != '-' || (c == '-' && row2[p.getAbsis()] == ' ')) {
+					row2[p.getAbsis()] = c;
+				}				
+			} else if (p.getOrdinat() == 3) {
+				if (c != '-' || (c == '-' && row3[p.getAbsis()] == ' ')) {
+					row3[p.getAbsis()] = c;
+				}				
+			} else if (p.getOrdinat() == 4) {
+				if (c != '-' || (c == '-' && row4[p.getAbsis()] == ' ')) {
+					row4[p.getAbsis()] = c;
+				}				
+			}
+        }
+		
+	}
+	
+	public boolean addElement(Element elmt) {
+		checkArray();
         if (elmt.getOrigin().getOrdinat() == 1){
-            if (row1[elmt.getOrigin().getAbsis()-1] == ' '){
-                row1[elmt.getOrigin().getAbsis()-1] = elmt.getShow();
+            if (row1[elmt.getOrigin().getAbsis()] == ' '){
+                row1[elmt.getOrigin().getAbsis()] = elmt.getShow();
 				return true;
             } else {
                 System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 2){
-            if (row2[elmt.getOrigin().getAbsis()-1] == ' '){
-                row2[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+            if (row2[elmt.getOrigin().getAbsis()] == ' '){
+                row2[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
                 System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 3){
-            if (row3[elmt.getOrigin().getAbsis()-1] == ' '){
-                row3[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+            if (row3[elmt.getOrigin().getAbsis()] == ' '){
+                row3[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
                 System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 4){
-            if (row4[elmt.getOrigin().getAbsis()-1] == ' '){
-                row4[elmt.getOrigin().getAbsis()-1] = elmt.getShow();  
+            if (row4[elmt.getOrigin().getAbsis()] == ' '){
+                row4[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
                 System.out.println("Sudah terisi");
@@ -73,46 +108,48 @@ public class Arena{
     }
 
 	public  void deleteElement(Point p){
+		checkArray();
         if (p.getOrdinat() == 1){
-            row1[p.getAbsis()-1] = ' ';
+            row1[p.getAbsis()] = ' ';
         } else if (p.getOrdinat() == 2){
-            row2[p.getAbsis()-1] = ' ';
+            row2[p.getAbsis()] = ' ';
         } else if (p.getOrdinat() == 3){
-            row3[p.getAbsis()-1] = ' ';
+            row3[p.getAbsis()] = ' ';
         } else if (p.getOrdinat() == 4){
-            row4[p.getAbsis()-1] = ' ';
+            row4[p.getAbsis()] = ' ';
         }
     }
 	
     public  boolean moveElement(Element elmt, Point p){ 
 	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
+		checkArray();
         if (p.getOrdinat() == 1){
-			if (row1[p.getAbsis()-1] == ' ') {
-				row1[p.getAbsis()-1] = elmt.getShow();
+			if (row1[p.getAbsis()] == ' ') {
+				row1[p.getAbsis()] = elmt.getShow();
 				deleteElement(elmt.getOrigin());
 				return true;
 			} else {
 				return false;
 			}
         } else if (p.getOrdinat() == 2){
-			if (row2[p.getAbsis()-1] == ' ') {
-				row2[p.getAbsis()-1] = elmt.getShow();
+			if (row2[p.getAbsis()] == ' ') {
+				row2[p.getAbsis()] = elmt.getShow();
 				deleteElement(elmt.getOrigin());
 				return true;
 			} else {
 				return false;
 			}
         } else if (p.getOrdinat() == 3){
-			if (row3[p.getAbsis()-1] == ' ') {
-				row3[p.getAbsis()-1] = elmt.getShow();
+			if (row3[p.getAbsis()] == ' ') {
+				row3[p.getAbsis()] = elmt.getShow();
 				deleteElement(elmt.getOrigin());
 				return true;
 			} else {
 				return false;
 			}
         } else if (p.getOrdinat() == 4){
-			if (row4[p.getAbsis()-1] == ' ') {
-				row4[p.getAbsis()-1] = elmt.getShow();
+			if (row4[p.getAbsis()] == ' ') {
+				row4[p.getAbsis()] = elmt.getShow();
 				deleteElement(elmt.getOrigin());
 				return true;
 			} else {
@@ -125,6 +162,7 @@ public class Arena{
     }
 	
     public void printArena(){
+		checkArray();
         //line 1
         for (int i= 0; i < 60; i++ ){
             System.out.print('*');            

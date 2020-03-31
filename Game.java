@@ -92,9 +92,9 @@ public class Game{
         int randomZombie = random.nextInt(2);
         Zombie zombie;
         if (randomZombie == 0){
-            zombie = new CrazyZombie(59, randomNumb+1);
+            zombie = new CrazyZombie(58, randomNumb+1);
         } else {
-            zombie = new RobotZombie(59, randomNumb+1);
+            zombie = new RobotZombie(58, randomNumb+1);
         }
         addElement(zombie, true);      
     }
@@ -104,7 +104,7 @@ public class Game{
         System.out.println("SKIP");
         System.out.println("ADDPLANT <row> <distance> <type>");
         System.out.println("row : 1 - 4 from top to bottom");
-        System.out.println("distance : 1 - 59 from left to right");
+        System.out.println("distance : 1 - 58 from left to right");
         System.out.println("Type : P for PeaShooter ; S for SnowPea");
     }
     }
