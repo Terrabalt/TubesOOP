@@ -49,5 +49,4 @@ public abstract class Zombie extends Element{
             Game.deleteElement(this);
         }
     } 
-
 }

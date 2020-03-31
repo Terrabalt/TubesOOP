@@ -36,8 +36,6 @@ public class Game{
                 }
                 addZombies();
             }
-            
-        
         }
     }
 
@@ -93,4 +91,4 @@ public class Game{
         System.out.println("distance : 1 - 59 from left to right");
         System.out.println("Type : P for PeaShooter ; S for SnowPea");
     }
-    }
+}
