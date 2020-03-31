@@ -24,26 +24,25 @@ public class Game{
         end = false;
     }
 
-    public static void skip(){
-        while (!end){
+    public static void skip() { 
+            List<Element> cElements = new ArrayList<Element>(elements);
+            for (Element element : cElements){
+                element.update();
+            }
+            addZombies();
             if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
                 end = true;
-                break;
-            } else {
-                List<Element> cElements = new ArrayList<Element>(elements);
-                for (Element element : cElements){
-                    element.update();
-                }
-                addZombies();
             }
-            
-        
-        }
     }
 
-    public static void addElement(Element elmt){
-        if (arena.addElement(elmt)) {
+    public static void addElement(Element elmt, boolean mustNotOverlap){
+		if (mustNotOverlap) {
+			if (arena.addElement(elmt)) {
+				elements.add(elmt);
+			}
+		} else {
 			elements.add(elmt);
+			arena.addElement(elmt);
 		}
     }
 
@@ -54,19 +53,24 @@ public class Game{
 		}
     }
 	
-    public static boolean moveElement(Element elmt, Point p){ 
+    public static boolean moveElement(Element elmt, Point p, boolean mustNotOverlap) { 
 	// bila elemen di p kosong, pindah elmt ke p dan return true. bila tidak, hanya return false.
-        return arena.moveElement(elmt, p);
+		if (mustNotOverlap) {
+			return arena.moveElement(elmt, p);
+		} else {
+			arena.moveElement(elmt, p);
+			return true;
+		}
     }
     
     public static void addPlants(int x, int y, String type){
         Plant plant;
         if (type.equals("P") || (type.equals("p"))){
             plant = new PeaShooter(x, y);
-            addElement(plant);
+            addElement(plant, true);
         } else if (type.equals("S") || (type.equals("s"))){
             plant = new SnowPea(x,y);
-            addElement(plant);
+            addElement(plant, true);
         } else {
             System.out.println("Input tipe salah");
         }
@@ -82,7 +86,7 @@ public class Game{
         } else {
             zombie = new RobotZombie(59, randomNumb+1);
         }
-        addElement(zombie);      
+        addElement(zombie, true);      
     }
 
     public static void printCommand(){

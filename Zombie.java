@@ -1,6 +1,10 @@
 public abstract class Zombie extends Element{
     private int life;
 
+	public static boolean isZombie(Element e) {
+		return e.getShow() == 'R' || e.getShow() == 'C';
+	}
+	
     public Zombie(int life, int x, int y){
         super(x,y);
         this.life = life;
@@ -24,16 +28,22 @@ public abstract class Zombie extends Element{
 	
     protected void walk(int distance){
         Point p = super.getOrigin();
-        p.translate(-distance,0);
+		if (p.getAbsis() > distance) {
+			p.translate(-distance,0);
+		} else {
+			p.translate(-p.getAbsis() + 1, 0);
+		}		
         while (distance > 0) {
-			if (Game.moveElement(this, p)) {
-				super.setOrigin(p);
+			p.translate(-1, 0);
+			distance--;
+			if (!Game.moveElement(this, p, true)) {
 				distance = 0;
 			} else {
 				distance--;
 				p.translate(1,0);
 			}
 		}
+		super.setOrigin(p);
     }
 
     // public void eat (Plant p);

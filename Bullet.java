@@ -26,7 +26,7 @@ public class Bullet extends Element{
     public void fly(int distance){
         Point p = super.getOrigin();
         p.translate(distance,0);
-		if (Game.moveElement(this, p)) {
+		if (Game.moveElement(this, p, false)) {
 			super.setOrigin(p);
         }    
     }
