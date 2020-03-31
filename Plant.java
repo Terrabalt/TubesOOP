@@ -1,7 +1,22 @@
+import java.util.List;
+
 public abstract class Plant extends Element{
     private int life;
     private int price;
 
+	public static boolean isPlant(Element e) {
+		return e.getShow() == 'P' || e.getShow() == 'S';
+	}
+	
+	public static boolean containsPlant(List<Element> e) {
+        for (Element element : e){
+            if (isPlant(element)) {
+				return true;
+			}
+        }
+		return false;		
+	}
+	
     public Plant(int life, int price, int x,int y){
         super(x,y);
         this.life = life;
@@ -28,7 +43,7 @@ public abstract class Plant extends Element{
 	
     protected void shoot(int power){
         Bullet bullet = new Bullet(power,super.getOrigin().getAbsis()+1, super.getOrigin().getOrdinat());
-        Game.addElement(bullet);
+        Game.addElement(bullet, false);
     }
 
     public void eaten(int power){
