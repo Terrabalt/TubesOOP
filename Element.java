@@ -38,7 +38,6 @@ public abstract class Element{
     }
 
     public void setOrigin(Point point){
-        origin.setAbsis(point.getAbsis());
-        origin.setOrdinat(point.getOrdinat());
+        origin = point;
     }
 }
