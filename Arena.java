@@ -82,7 +82,6 @@ public class Arena{
                 row1[elmt.getOrigin().getAbsis()] = elmt.getShow();
 				return true;
             } else {
-                System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 2){
@@ -90,7 +89,6 @@ public class Arena{
                 row2[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
-                System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 3){
@@ -98,7 +96,6 @@ public class Arena{
                 row3[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
-                System.out.println("Sudah terisi");
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 4){
@@ -106,7 +103,6 @@ public class Arena{
                 row4[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
-                System.out.println("Sudah terisi");
 				return false;
             }
         } else {

@@ -81,16 +81,26 @@ public class Game{
     public static void addPlants(int x, int y, String type){
         Plant plant;
         if (type.equals("P") || (type.equals("p"))){
-            plant = new PeaShooter(x, y);
-            addElement(plant, true);
-			if (!elements.contains(plant)) {
-				sunflowerPoints += 350;
+			if (sunflowerPoints >= 350) {
+				plant = new PeaShooter(x, y);
+				addElement(plant, true);
+				if (!elements.contains(plant)) {
+					sunflowerPoints += 350;
+					System.out.println("Sudah terisi");
+				}
+			} else {
+				System.out.println("Sunflower Points tidak mencukupi!");
 			}
         } else if (type.equals("S") || (type.equals("s"))){
-            plant = new SnowPea(x,y);
-            addElement(plant, true);
-			if (!elements.contains(plant)) {
-				sunflowerPoints += 600;
+			if (sunflowerPoints >= 600) {
+				plant = new SnowPea(x,y);
+				addElement(plant, true);
+				if (!elements.contains(plant)) {
+					sunflowerPoints += 600;
+					System.out.println("Sudah terisi");
+				}
+			} else {
+				System.out.println("Sunflower Points tidak mencukupi!");				
 			}
         } else {
             System.out.println("Input tipe salah");
