@@ -19,7 +19,7 @@ public class Game{
 
     public Game(){
         Game.arena = new Arena();
-        sunflowerPoints = 10000;
+        sunflowerPoints = 1000;
         elements = new ArrayList<Element>();
         end = false;
     }
@@ -35,6 +35,7 @@ public class Game{
         if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
             end = true;
         }
+		sunflowerPoints += 50;
     }
 
     public static void addElement(Element elmt, boolean mustNotOverlap){
@@ -53,7 +54,6 @@ public class Game{
 			arena.deleteElement(elmt.getOrigin());
 			elements.remove(elmt);
 			if (elmt.getShow() == 'R' || elmt.getShow() == 'C') {
-				sunflowerPoints += 50;
 			} 
 		}
     }
