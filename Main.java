@@ -18,8 +18,8 @@ class Main {
       if (str.equals("SKIP")){
         Game.skip();
       } else if (str.equals("ADDPLANT")){
-          int x = input.nextInt();
           int y = input.nextInt();
+          int x = input.nextInt();
           String type = input.next();
           Game.addPlants(x, y, type);
           Game.skip();
