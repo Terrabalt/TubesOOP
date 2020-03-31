@@ -1,8 +1,19 @@
+import java.util.List;
+
 public abstract class Zombie extends Element{
     private int life;
 
 	public static boolean isZombie(Element e) {
 		return e.getShow() == 'R' || e.getShow() == 'C';
+	}
+	
+	public static boolean containsZombie(List<Element> e) {
+        for (Element element : e){
+            if (isZombie(element)) {
+				return true;
+			}
+        }
+		return false;		
 	}
 	
     public Zombie(int life, int x, int y){
@@ -28,25 +39,29 @@ public abstract class Zombie extends Element{
 	
     protected void walk(int distance){
         Point p = super.getOrigin();
-		if (p.getAbsis() > distance) {
-			p.translate(-distance,0);
-		} else {
-			p.translate(-p.getAbsis() + 1, 0);
-		}		
         while (distance > 0) {
 			p.translate(-1, 0);
 			distance--;
 			if (!Game.moveElement(this, p, true)) {
-				distance = 0;
+				if (Plant.containsPlant(Game.getElements(p))) { //
+					distance = 0;
+					for (Element e : Game.getElements(p)) {
+						if (Plant.isPlant(e)) {
+							((Plant)e).eaten(1);
+						}
+					}
+				} else if (!Zombie.containsZombie(Game.getElements(p))){
+					Game.moveElement(this, p, false);
+					super.setOrigin(p);					
+				}
 			} else {
-				distance--;
-				p.translate(1,0);
+				super.setOrigin(p);
+			}
+			if (p.getAbsis() <= 1) {
+				distance = 0;
 			}
 		}
-		super.setOrigin(p);
     }
-
-    // public void eat (Plant p);
         
     public void shot(int power){
         if (life >= power){

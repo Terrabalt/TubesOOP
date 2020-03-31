@@ -1,9 +1,20 @@
+import java.util.List;
+
 public abstract class Plant extends Element{
     private int life;
     private int price;
 
 	public static boolean isPlant(Element e) {
 		return e.getShow() == 'P' || e.getShow() == 'S';
+	}
+	
+	public static boolean containsPlant(List<Element> e) {
+        for (Element element : e){
+            if (isPlant(element)) {
+				return true;
+			}
+        }
+		return false;		
 	}
 	
     public Plant(int life, int price, int x,int y){

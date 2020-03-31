@@ -26,6 +26,9 @@ public class Bullet extends Element{
     public void fly(int distance){
         Point p = super.getOrigin();
         p.translate(distance,0);
+		if(p.getAbsis() >= 60) {
+			Game.deleteElement(this);
+		} else
 		if (Game.moveElement(this, p, false)) {
 			super.setOrigin(p);
         }    

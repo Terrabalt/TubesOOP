@@ -25,14 +25,14 @@ public class Game{
     }
 
     public static void skip() { 
-            List<Element> cElements = new ArrayList<Element>(elements);
-            for (Element element : cElements){
-                element.update();
-            }
-            addZombies();
-            if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
-                end = true;
-            }
+        List<Element> cElements = new ArrayList<Element>(elements);
+        for (Element element : cElements){
+            element.update();
+        }
+        addZombies();
+        if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
+            end = true;
+        }
     }
 
     public static void addElement(Element elmt, boolean mustNotOverlap){
@@ -62,6 +62,16 @@ public class Game{
 			return true;
 		}
     }
+	
+	public static List<Element> getElements(Point p) {
+        List<Element> cElements = new ArrayList<Element>();
+        for (Element element : elements){
+            if(element.getOrigin().equals(p)) {
+				cElements.add(element);
+			}
+        }
+		return cElements;		
+	}
     
     public static void addPlants(int x, int y, String type){
         Plant plant;
