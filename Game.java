@@ -27,7 +27,9 @@ public class Game{
     public static void skip() { 
         List<Element> cElements = new ArrayList<Element>(elements);
         for (Element element : cElements){
-            element.update();
+			if (elements.contains(element)) {
+				element.update();
+			}
         }
         addZombies();
         if ((arena.row1[1] == 'C') || (arena.row1[1] == 'R') || (arena.row2[1] == 'C') || (arena.row2[1] == 'R') || (arena.row3[1] == 'C') || (arena.row3[1] == 'R') || (arena.row4[1] == 'C') || (arena.row4[1] == 'R')){ // cek ada zombie diujung ato ngga
@@ -50,6 +52,9 @@ public class Game{
 		if (elements.contains(elmt)) {
 			arena.deleteElement(elmt.getOrigin());
 			elements.remove(elmt);
+			if (elmt.getShow() == 'R' || elmt.getShow() == 'C') {
+				sunflowerPoints += 50;
+			} 
 		}
     }
 	
@@ -78,9 +83,15 @@ public class Game{
         if (type.equals("P") || (type.equals("p"))){
             plant = new PeaShooter(x, y);
             addElement(plant, true);
+			if (!elements.contains(plant)) {
+				sunflowerPoints += 350;
+			}
         } else if (type.equals("S") || (type.equals("s"))){
             plant = new SnowPea(x,y);
             addElement(plant, true);
+			if (!elements.contains(plant)) {
+				sunflowerPoints += 600;
+			}
         } else {
             System.out.println("Input tipe salah");
         }

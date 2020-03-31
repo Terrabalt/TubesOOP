@@ -50,6 +50,8 @@ public class Bullet extends Element{
 		}
     }
 
-//    public void kill(Zombie z);
-
+    public void kill(Zombie z) {
+		z.shot(power);
+		Game.deleteElement(this);
+	}
 }

@@ -53,6 +53,11 @@ public abstract class Zombie extends Element{
 				} else if (!Zombie.containsZombie(Game.getElements(p))){
 					Game.moveElement(this, p, false);
 					super.setOrigin(p);					
+					for (Element e : Game.getElements(p)) {
+						if (e.getShow() == '-') {
+							((Bullet)e).kill(this);
+						}
+					}
 				}
 			} else {
 				super.setOrigin(p);
@@ -66,7 +71,6 @@ public abstract class Zombie extends Element{
     public void shot(int power){
         if (life >= power){
             setLife(getLife()-power);
-            Game.sunflowerPoints += 1;
         } else {
             setLife(0);
         }

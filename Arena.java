@@ -70,7 +70,7 @@ public class Arena{
 	public boolean addElement(Element elmt) {
 		checkArray();
         if (elmt.getOrigin().getOrdinat() == 1){
-            if (row1[elmt.getOrigin().getAbsis()] == ' '){
+            if (row1[elmt.getOrigin().getAbsis()] == ' ' || row1[elmt.getOrigin().getAbsis()] == '-'){
                 row1[elmt.getOrigin().getAbsis()] = elmt.getShow();
 				return true;
             } else {
@@ -78,7 +78,7 @@ public class Arena{
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 2){
-            if (row2[elmt.getOrigin().getAbsis()] == ' '){
+            if (row2[elmt.getOrigin().getAbsis()] == ' ' || row2[elmt.getOrigin().getAbsis()] == '-'){
                 row2[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
@@ -86,7 +86,7 @@ public class Arena{
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 3){
-            if (row3[elmt.getOrigin().getAbsis()] == ' '){
+            if (row3[elmt.getOrigin().getAbsis()] == ' ' || row3[elmt.getOrigin().getAbsis()] == '-'){
                 row3[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
@@ -94,7 +94,7 @@ public class Arena{
 				return false;
             }
         } else if (elmt.getOrigin().getOrdinat() == 4){
-            if (row4[elmt.getOrigin().getAbsis()] == ' '){
+            if (row4[elmt.getOrigin().getAbsis()] == ' ' || row4[elmt.getOrigin().getAbsis()] == '-'){
                 row4[elmt.getOrigin().getAbsis()] = elmt.getShow();  
 				return true; 
             } else {
